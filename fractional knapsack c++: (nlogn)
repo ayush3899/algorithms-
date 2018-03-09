@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+#include <stdlib.h>
+
+struct item
+{
+	double value;
+	double weight;
+};
+
+int comparator(const void *a,const void *b)
+{
+	double r1=(((struct item*)a)->value)/(((struct item*)a)->weight);
+	double r2=(((struct item*)b)->value)/(((struct item*)b)->weight);
+	return r1<r2;
+}
+
+int main()
+{
+	int i,n;
+	double v,w,max,total=0;
+	printf("Enter the number of value weight pairs\n");
+	scanf("%d",&n);
+	struct item arr[n];
+	printf("Enter value and weight for each of the pairs\n");
+	for(i=0;i<n;i++)
+	{
+		scanf("%lf %lf",&v,&w);
+		arr[i].value=v;
+		arr[i].weight=w;
+	}
+	qsort((void*)arr,n,sizeof(arr[0]),comparator);
+	printf("Enter the capacity of knapsack\n");
+	scanf("%lf",&max);
+	for(i=0;i<n;i++)
+	{
+		if(!max)
+			break;
+		if(arr[i].weight<max)
+		{
+			total+=arr[i].value;
+			max-=arr[i].weight;
+		}
+		else
+		{
+			total+=(arr[i].value)/(arr[i].weight)*max;
+			max=0;
+		}
+	}
+	printf("Max value in knapsack is %lf\n",total);
+	return 0;
+}
