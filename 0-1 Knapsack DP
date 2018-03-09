@@ -1,0 +1,50 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+int max(int a, int b) 
+{
+	return (a > b)? a : b; 
+	
+}
+
+int knap(int W,int wt[],int p[],int n)
+{
+	int i,j;
+	int k[n+1][W+1];
+	
+	for(i=0;i<=n;i++)
+	{
+		for(j=0;j<=W;j++)
+		{
+			if(i==0 || j==0)
+				k[i][j]=0;
+			else if (wt[i-1]<=j)
+				k[i][j]=max(p[i-1]+k[i-1][j-wt[i-1]],  k[i-1][j]);
+			else
+				k[i][j]=k[i-1][j];
+		}
+	}
+	
+	return k[n][W];
+}
+
+int main()
+{
+	int n,W,t;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>W;
+		int p[n+6],wt[n+6];
+		for(int i=0;i<n;i++)
+		{
+			cin>>p[i];
+		}
+		for(int i=0;i<n;i++)
+		{
+			cin>>wt[i];
+		}	
+		cout<<knap(W,wt,p,n)<<"\n";
+	}
+	return 0;
+}	
