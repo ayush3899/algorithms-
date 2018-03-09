@@ -1,0 +1,46 @@
+#include <iostream>
+using namespace std;
+ 
+int egp(int nr, int dr)
+{
+    if (dr == 0 || nr == 0)
+        return 0;
+    if (dr%nr == 0)
+    {
+        cout << "1/" << dr/nr;
+        return 0;
+    }
+ 
+   
+    if (nr%dr == 0)
+    {
+        cout << nr/dr;
+        return 0;
+    }
+ 
+ 
+    if (nr > dr)
+    {
+        cout << nr/dr << " + ";
+        egp(nr%dr, dr);
+        return 0;
+    }
+ 
+    int n = dr/nr + 1;
+    cout << "1/" << n << " + ";
+    egp(nr*n-dr, dr*n);
+ }
+
+int main()
+{
+    int a,b,t;
+    cin>>t;
+    while(t--)
+    {
+    	cin>>a>>b;
+    	cout<<egp(a,b);
+    }
+ 
+    
+    return 0;
+}
