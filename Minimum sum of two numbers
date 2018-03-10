@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int minsum(int arr[], int n)
+{
+    // min Heap
+    priority_queue <int, vector<int>, greater<int> > pq;
+ 
+    string str1, str2;
+    for(int i=0; i<n; i++)
+        pq.push(arr[i]);
+ 
+    while(!pq.empty())
+    {
+        str1+=(48 + pq.top());
+        pq.pop();
+        if(!pq.empty())
+        {
+            str2+=(48 + pq.top());
+            pq.pop();
+        }
+    }
+ 
+    int a = atoi(str1.c_str());
+    int b = atoi(str2.c_str());
+    return a+b;
+}
+ 
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+    	int n;
+    	cin>>n;
+    	int a[n];
+    	for(int i=0;i<n;i++)
+    	{
+    		cin>>a[i];
+    	}
+    	cout<<minsum(a, n)<<endl;
+    }
+    
+    return 0;
+}
