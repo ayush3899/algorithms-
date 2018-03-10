@@ -1,0 +1,44 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+//ayush kushwaha
+//input
+// 1
+// 4
+// 4 3 2 6
+//output
+//29
+int ropemincost(int a[],int n)
+{
+	priority_queue<int,vector<int>,greater<int> >p(a,a+n);
+	int s=0;
+	
+	while(p.size()>1)
+	{
+		int x1=p.top();
+		p.pop();
+		int x2=p.top();
+		p.pop();
+		s+=x1+x2;
+		p.push(x1+x2);
+	}
+	return s;
+}
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		int a[n];
+		for(int i=0;i<n;i++)
+		{
+			cin>>a[i];
+		}
+		cout<<ropemincost(a,n)<<"\n";
+	}
+	return 0;
+}
