@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+int find(int m,int s)
+{
+	if(s==0)
+	{
+		(m == 1)? cout << "Smallest number is " << 0
+                : cout << "Not possible";
+		return 0;
+	}
+	if(s>9*m)
+	{
+		cout<<"not posssible";
+		return 0;
+	}
+	int p[m+1];
+	s-=1;
+	for(int i=m-1;i>0;i--)
+	{
+		if(s>9)
+		{
+			p[i]=9;
+			s-=9;
+		}
+		else
+		{
+			p[i]=s;
+			s=0;
+		}
+	}
+	p[0] = s + 1;  
+    //cout << "Smallest number is ";
+    for (int i=0; i<m; i++)
+        cout <<p[i];
+	
+}
+	
+
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int m,s;
+		cin>>m>>s;
+		cout<<find(m,s)<<"\n";
+	}
+	return 0;
+}
