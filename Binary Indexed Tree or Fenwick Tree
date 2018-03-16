@@ -1,0 +1,170 @@
+// in this code there is an implemetation of  Binary index tree 
+//we can solve good problems in less time complexity 
+//like finding the number of inversions 
+//Binary Indexed trees are used to implement the arithmetic coding algorithm. Development of operations it supports were primarily motivated by use in that case.
+//Binary Indexed Tree can be used to count inversions in an array in O(N*logN) time.
+
+
+
+#include<bits/stdc++.h>
+#include<set>
+#include<map>
+#include <unordered_map>
+#include <unordered_set>
+#include<list>
+#include<iomanip>
+#include<cmath>
+#include<string>
+#include<vector>
+#include<queue>
+#include<stack>
+#include<complex>
+#include<sstream>
+#include<iostream>
+#include<fstream>
+#include<algorithm>
+#include<numeric>
+#include<utility>
+#include<functional>
+#include<stdio.h>
+#include<assert.h>
+#include<memory.h>
+#include<bitset>
+#include<math.h>
+#include <strings.h>
+
+
+
+#define f first
+#define s second
+#define pb push_back
+#define sz(a) (int)(a).size()
+#define lp(i,a,n) for(int (i)=(a);(i)<=(int)(n);(i)++)
+#define lpd(i,n,a) for(int (i)=(n);(i)>=(a);--(i))
+#define mp make_pair
+#define clr(a,b) memset(a,b,sizeof a)
+#define all(v) (v).begin(),(v).end()
+#define mod 1000000007
+#define eps 1e-6
+#define infi 1000000000
+#define infll 4000000000000000005ll
+#define MX 1000000
+#define X real()
+#define Y imag()
+#define polar(r,t) ((r)* exp(point(0,(t))))
+#define length(a) hypot( (a).X , (a).Y )
+#define angle(a) atan2( (a).Y , (a).X )
+#define vec(a,b) ( (b) - (a) )
+#define dot(a,b) (conj(a)*(b)).X
+#define cross(a,b) (conj(a)*(b)).Y
+#define lengthsqr(a) dot(a,a)
+#define reflect(V,M) (conj((V)/(M)) * (M))
+#define normalize(a)   ((a)/length(a))
+#define ccw(a,b,c)   cross(vec(a,b) , vec(a,c)) > -eps
+#define cosRule(a,b,c) (acos(((a)*(a)+(b)*(b)-(c)*(c))/(2*(a)*(b))))
+#define cosDot(a,b) (acos(dot(a,b)/length(a)/length(b)))
+#define EQ(a,b) (fabs((a) - (b)) <= eps) /* equal to */
+#define NE(a,b) (fabs((a) - (b)) > eps)  /* not equal to */
+#define LT(a,b) ((a) < (b) - eps)        /* less than */
+#define GT(a,b) ((a) > (b) + eps)        /* greater than */
+#define LE(a,b) ((a) <= (b) + eps)       /* less than or equal to */
+#define GE(a,b) ((a) >= (b) - eps)       /* greater than or equal to */
+#define mod1 100050001
+#define mod2 100030001
+#define base1 37
+#define base2 31
+#define que priority_queue<pair<int,int>, vector<pair<int,int>> , greater<pair<int,int> > >
+#define rotate(v,t) ((v)*exp(point(0,t)))
+#define rotateabout(v,t,a) (rotate(vec(a,v),t)+(a))
+#define PI atan(1)*4
+
+
+using namespace std;
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<double,double> pdd;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;
+typedef vector<ll> vll;
+typedef vector<vi> vvi;
+typedef set<int> si;
+typedef map<int, int> mii;
+typedef map<ll, ll> mll;
+typedef unordered_map<ll, ll> umll;
+typedef complex<long double> point;
+typedef pair<point, point> line;
+typedef pair<double , point> Circle;
+
+
+void update(ll x,ll d,ll bit[],ll n)
+{
+for(;x<=n;x+=(x&(-x)))
+  bit[x]+=d;
+   //cout<<"p5"<<"\n";
+}
+
+ll sum(ll x,ll bit[])
+{
+  ll s=0;
+  for(;x>0;x-=x&(-x))
+  s+=bit[x];
+   //cout<<"p4"<<"\n";
+  return s;
+}
+
+void convert(ll a[],ll n)
+{
+  ll t[n];
+  for(ll i=0;i<n;i++)
+  {
+    t[i]=a[i];
+     //cout<<"p2"<<"\n";
+  }
+    sort(t,t+n);
+    for(ll i=0;i<n;i++)
+    {
+      a[i]=lower_bound(t,t+n,a[i])-t+1;
+       //cout<<"p3"<<"\n";
+    }
+}
+
+ll inversion(ll a[],ll n,ll bit[])
+{
+  ll in=0;
+  convert(a,n);
+  for(ll i=1;i<=n;i++)
+  {
+    bit[i]=0;
+  }
+   //cout<<"p65"<<"\n";
+for(ll i=n-1;i>=0;i--)
+{
+  in+=sum(a[i]-1,bit);
+  update(a[i],1,bit,n);
+  //cout<<"p1"<<"\n";
+}
+return in;
+
+}
+
+int main()
+{
+ 	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    ll t,n;
+    cin>>t;
+    while(t--)
+    {
+      cin>>n;
+       //cout<<"p9898"<<"\n";
+       ll bit[n+5],a[n+5];
+      for(ll i=0;i<n;i++)
+      {
+        cin>>a[i];
+      }
+       //cout<<"p798645132"<<"\n";
+      cout<<inversion(a,n,bit)<<"\n";
+      //cout<<"last"<<"\n";
+    }
+    return 0;
+}
