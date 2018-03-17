@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+long lpower(long N)
+    {
+        N = N| (N>>1);
+        N = N| (N>>2);
+        N = N| (N>>4);
+        N = N| (N>>8);
+        return (N+1)>>1;
+    }
+int main() {
+	// your code goes here
+	long n;
+	cin>>n;
+	cout<<lpower(n)<<"\n";
+	return 0;
+}
+//in==>36,out=>>32
