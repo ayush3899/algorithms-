@@ -1,0 +1,66 @@
+// for 0s replace 1 with 0 in code.
+
+#include<bits/stdc++.h>
+using namespace std;
+#define ll int
+int main()
+{
+  ll i,j;
+  ll r,c;
+  cin>>r>>c;
+  ll a[r][c];
+  for(ll i=0;i<r;i++)
+  {
+    for(ll j=0;j<c;j++)
+    {
+      cin>>a[i][j];
+    }
+  }
+  ll b[r][c];
+  ll maxb,maxi,maxj;
+
+  for( i=0;i<r;i++)
+  {
+    b[i][0]=a[i][0];
+  }
+  for( j=0;j<c;j++)
+  {
+    b[0][j]=a[0][j];
+  }
+  for( i=1;i<r;i++)
+  {
+    for( j=1;j<c;j++)
+    {
+      if(a[i][j]==1)
+        b[i][j]=min(b[i-1][j-1],min(b[i][j-1],b[i-1][j]))+1;
+      else
+      b[i][j]=0;
+    }
+  }
+  maxi=0;
+  maxj=0;
+  maxb=b[0][0];
+  for( i=0;i<r;i++)
+  {
+    for(j=0;j<c;j++)
+    {
+      if(maxb<b[i][j])
+        {
+            maxb=b[i][j];
+            maxi=i;
+            maxj=j;
+            
+        }
+    }
+  }
+  //to print the square matrix of the given matrix
+for(i=maxi;i>(maxi-maxb);i--)
+{
+  for(j=maxj;j>(maxj-maxb);j--)
+  {
+      cout<<a[i][j]<<" ";
+  }
+  cout<<"\n";
+}
+  return 0;
+}
