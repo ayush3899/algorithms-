@@ -1,0 +1,13 @@
+def kan(a,size):
+     
+    mar =a[0]
+    cmax = a[0]
+     
+    for i in range(1,size):
+        cmax = max(a[i], cmax + a[i])
+        maxr = max(mar,cmax)
+         
+    return maxr
+ 
+a = [-2, -3, 4, -1, -2, 1, 5, -3]
+print"Maximum contiguous sum is" , kan(a,len(a))
