@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	// your code goes here
+	int i,j,m,n;
+	cin>>n>>m;
+	int a[n][m];
+	for(i=0;i<n;i++)
+	{
+		a[i][0]=1;
+	}
+	
+	for(j=0;j<m;j++)
+	{
+		a[0][j]=1;
+	}
+	
+	for(i=1;i<n;i++)
+	{
+		for(j=1;j<m;j++)
+		{
+			a[i][j]=a[i-1][j]+a[i][j-1];
+		}
+	}
+	cout<<a[n-1][m-1];
+	return 0;
+}
