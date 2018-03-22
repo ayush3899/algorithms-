@@ -1,0 +1,44 @@
+//Given two strings str1 and str2 and below operations that can performed on str1. Find minimum number of edits (operations) required to convert ‘str1’ into ‘str2’.
+
+//Insert
+//Remove
+//Replace
+
+
+#include<bits/stdc++.h>
+using namespace std;
+#define ll int
+int main()
+{
+	string s1,s2;
+	cin>>s1;
+	cin>>s2;
+  ll i,j;
+  ll r,c;
+   r=s1.length();
+   c=s2.length();
+   
+   int dp[r+1][c+1];
+   
+   for(int i=0;i<=r;i++)
+   {
+   	for(int j=0;j<=c;j++)
+   	{
+   		if(i==0)
+   		{
+   		dp[i][j]=j;
+   		}
+   		else if(j==0)
+   		{
+   		dp[i][j]=i;
+   		}
+   		else if(s1[i-1]==s2[j-1])
+   			dp[i][j]=dp[i-1][j-1];
+   		else 
+   		dp[i][j]=min(min(dp[i-1][j],dp[i][j-1]),dp[i-1][j-1])+1;
+   		
+   	}
+   }
+   cout<<dp[r][c]<<"\n";
+  return 0; 
+}
