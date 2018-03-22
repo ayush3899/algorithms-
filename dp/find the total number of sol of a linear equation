@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int countSol(int coeff[], int n, int rhs)
+{
+    int dp[rhs+1];
+    memset(dp, 0, sizeof(dp));
+    dp[0] = 1;
+     for (int i=0; i<n; i++)
+      for (int j=coeff[i]; j<=rhs; j++)
+         dp[j] += dp[j-coeff[i]];
+ 
+    return dp[rhs];
+}
+
+
+int main() {
+	// your code goes here
+	int n;
+	cin>>n;
+	int r;
+	cin>>r;
+	int a[n+1];
+	for(int i=0;i<n;i++){
+	cin>>a[i];}
+	cout<<countSol(a,n,r)<<"\n";
+	return 0;
+}
