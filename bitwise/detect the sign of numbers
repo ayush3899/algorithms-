@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool op(int x, int y)
+{
+	return ((x ^ y) < 0);
+}
+
+int main()
+{
+	int x,y;
+	cin>>x>>y;
+	if (op(x, y) == true)
+	printf ("Signs are opposite");
+	else
+	printf ("Signs are not opposite");
+	return 0;
+}
