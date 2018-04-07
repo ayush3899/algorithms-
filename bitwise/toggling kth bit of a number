@@ -1,0 +1,15 @@
+#include<iostream>
+using namespace std;
+ 
+int toggleKthBit(int n, int k)
+{
+    return (n ^ (1 << (k-1)));
+}
+ 
+// Driver code
+int main()
+{
+    int n = 5, k = 1;
+    cout << toggleKthBit(n , k);
+    return 0;
+}
