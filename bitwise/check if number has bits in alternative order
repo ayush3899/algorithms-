@@ -1,0 +1,30 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool findPattern(int n)
+{
+	int prev = n % 2;
+	n = n/2;
+	while (n > 0)
+	{
+		int curr = n % 2;
+		if (curr == prev)
+		return false;
+
+		prev = curr;
+		n = n / 2;
+	}
+
+	return true;
+}
+
+int main()
+{
+	int n;
+	cin>>n;
+	if (findPattern(n))
+		cout << "Yes";
+	else
+		cout << "No";
+
+	return 0;
+}
