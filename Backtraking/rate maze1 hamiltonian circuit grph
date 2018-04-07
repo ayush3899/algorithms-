@@ -1,0 +1,101 @@
+#include <iostream>
+#include<string>
+#include<vector>
+#define V 5
+#include<utility>
+using namespace std;
+// 1.PRINT PERMUTATIONS-------------------------------------------------
+void fun(string str,int l,int r)
+{
+if(l==r)
+{
+cout<<str<<endl;
+return;
+}
+for(int i=l;i<r;i++)
+{
+swap(str[i],str[l]);
+fun(str,l+1,r);
+swap(str[i],str[l]);
+}
+}
+//2.HAMILTONIAN CIRCUIT-------------------------------------------------------------
+int isvalid(int graph[V][V],int src,int dest,int path[V])
+{
+ //cout<<"src="<<src<<"dest="<<dest<<endl;
+if(graph[src][dest]==0)
+return 0;
+for(int i=0;i<V;i++)
+{
+if(path[i]==dest)
+return 0;
+}
+return 1;
+}
+void hamil(int graph[V][V],int path[V],int pos)
+{
+if(pos==V)
+{
+if(graph[path[V-1]][path[0]])
+{
+for(int i=0;i<V;i++)
+cout<<path[i]<<" ";
+}
+cout<<endl;
+return ;
+}
+for(int i=1;i<V;i++)
+{
+if(isvalid(graph,path[pos-1],i,path))
+{
+path[pos]=i;
+hamil(graph,path,pos+1);
+path[pos]=0;
+}
+}
+}
+
+//3.RAT MAZE----------------------------------------------------------------
+int issafe(int x,int y,vector<pair<int,int> >path,int n,int m)
+{
+if(!(x<=n&&y<=m))
+return 0;
+for(int i=0;i<path.size();i++)
+{
+if(path[i].first==x&&path[i].second==y)
+return 0;
+}
+return 1;
+}
+int fun(int graph[4][4],int x,int y,vector<pair<int,int> >&path,int n,int m)
+{
+if(x==n-1&&y==m-1)
+{
+for(int i=0;i<path.size();i++)
+cout<<path[i].first<<" "<<path[i].second<<endl;
+cout<<"Reached"<<endl;
+}
+if(issafe(x+1,y,path,n,m)&&graph[x+1][y])   // go right
+{
+path.push_back(make_pair(x+1,y));
+fun(graph,x+1,y,path,n,m);
+path.pop_back();
+}
+
+if(issafe(x,y+1,path,n,m)&&graph[x][y+1])   // go down
+{
+path.push_back(make_pair(x,y+1));
+fun(graph,x,y+1,path,n,m);
+path.pop_back();
+}
+}
+int main()
+{
+int maze[4][4]={{1, 0, 0, 0},
+                {1, 1, 1, 1},
+                {0, 1, 0, 1},
+                {1, 1, 1, 1}};
+vector<pair<int,int> >path;
+path.push_back(make_pair(0,0));
+fun(maze,0,0,path,4,4);
+}
