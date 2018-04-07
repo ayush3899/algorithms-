@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int isPowerOfTwo(unsigned n)
+{ return n && (! (n & (n-1)) ); }
+
+
+int findPosition(unsigned n)
+{
+	if (!isPowerOfTwo(n))
+		return -1;
+
+	unsigned i = 1, pos = 1;
+	while (!(i & n))
+	{
+		i = i << 1;
+
+		++pos;
+	}
+
+	return pos;
+}
+
+int main(void)
+{
+	int n ;//= 16;
+	cin>>n;
+	int pos = findPosition(n);
+	cout<<pos<<"\n";
+
+	return 0;
+}
