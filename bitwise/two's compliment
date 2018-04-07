@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string TWOS(string str)
+{
+	int n = str.length();
+
+	// Traverse the string to get first '1' from
+	// the last of string
+	int i;
+	for (i = n ; i >= 0 ; i--)
+		if (str[i] == '1')
+			break;
+
+	// If there exists no '1' concat 1 at the
+	// starting of string
+	if (i == 0)
+		return '1' + str;
+
+	// Continue traversal after the position of
+	// first '1'
+	for (int k = i-1 ; k >= 0; k--)
+	{
+
+		if (str[k] == '1')
+			str[k] = '0';
+		else
+			str[k] = '1';
+	}
+
+	return str;
+}
+
+int main()
+{
+	string str;
+	cin>>str;
+	cout << TWOS(str);
+	return 0;
+}			 
