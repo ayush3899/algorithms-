@@ -1,0 +1,17 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+unsigned int toggleAllExceptK(unsigned int n,
+							unsigned int k)
+{
+	return ~(n ^ (1 << k));
+}
+
+
+int main()
+{
+	unsigned int n = 1;//4294967295;
+	unsigned int k = 1;
+	printf("%u", toggleAllExceptK( n, k));
+	return 0;
+}
