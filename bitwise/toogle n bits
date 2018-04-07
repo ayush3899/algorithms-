@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// function to toggle
+// the last m bits
+unsigned int toggleLastMBits
+         (unsigned int n, unsigned int m)
+{
+     
+    // calculating a number 
+    // 'num' having 'm' bits
+    // and all are set. 
+    unsigned int num = (1 << m) - 1;
+ 
+    // toggle the last m bits
+    // and return the number
+    return (n ^ num);
+}
+ 
+// Driver code
+int main()
+{
+    unsigned int n = 107;
+    unsigned int m = 4;
+    cout << toggleLastMBits(n, m);
+    return 0;
+}
