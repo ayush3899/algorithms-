@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int totalFlips(string A,string B,string C, int N)
+{
+	int count = 0;
+	for (int i=0; i < N; ++i)
+	{
+		// If both A[i] and B[i] are equal
+		if (A[i] == B[i] && C[i] == '1')
+			++count;
+
+		// If Both A and B are unequal
+		else if (A[i] != B[i] && C[i] == '0')
+			++count;
+	}
+	return count;
+}
+
+int main()
+{
+    
+	int N;
+	cin>>N;
+// 	"10100";
+// 	"00010";
+// 	"10011";
+//enter above value t with n=5
+    string a,b,c;
+    cin>>a>>b>>c;
+	cout << totalFlips(a, b, c, N);
+
+	return 0;
+}
