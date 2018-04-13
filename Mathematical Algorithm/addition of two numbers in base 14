@@ -1,0 +1,106 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+string sumBase14(string a, string b)
+{
+    string ans = "";
+    int l1 = a.length();
+    int l2 = b.length();
+    reverse(a.begin(), a.end());
+    reverse(b.begin(), b.end());
+    int min = l1<l2?l1:l2;
+    int carry = 0;
+    int x,y,z;
+    char ch;
+    for(int i = 0; i < min; i++)
+    {
+        if(a[i]>='0' && a[i]<='9')
+            x = a[i] - '0';
+        else
+            x = a[i] - 'A' + 10;
+        if(b[i]>='0' && b[i]<='9')
+            y = b[i] - '0';
+        else
+            y = b[i] - 'A' + 10;
+        z = x+y+carry;
+        carry = 0;
+        if(z<=9)
+            ch = z+'0';
+        else if(z>9 && z<=13)
+            ch = 'A' + z - 9;
+        else
+        {
+            ch = 'D';
+            carry = z-13;
+        }
+        ans = ans+ch;
+    }
+    if(l1>l2)
+    {
+        for(int i = l2; i<l1; i++)
+        {
+            if(a[i]>='0'&&a[i]<='9')
+                x = a[i] - '0';
+            else
+                x = a[i] - 'A' + 10;
+            z = x+carry;
+            carry = 0;
+            if(z<=9)
+                ch = z+'0';
+            else if(z>9&&z<=13)
+                ch = 'A' + z - 9;
+            else
+            {
+                ch = 'D';
+                carry = z-13;
+            }
+            ans = ans+ch;
+        }
+    }
+    if(l2>l1)
+    {
+        for(int i = l1; i<l2; i++)
+        {
+            if(b[i]>='0'&&b[i]<='9')
+                x = b[i] - '0';
+            else
+                x = b[i] - 'A' + 10;
+            z = x+carry;
+            carry = 0;
+            if(z<=9)
+                ch = z+'0';
+            else if(z>9&&z<=13)
+                ch = 'A' + z - 9;
+            else
+            {
+                ch = 'D';
+                carry = z-13;
+            }
+            ans = ans+ch;
+        }
+    }
+    if(carry>0)
+    {
+        if(carry<=9)
+            ch = carry+'0';
+        else if(z>9&&z<=13)
+            ch = 'A' + carry - 9;
+        else
+        {
+            ch = 'D';
+            carry = carry-13;
+        }
+        ans = ans+ch;
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
+int main()
+{
+	string num1 = "DC2";
+	string num2 = "A3";
+	cout<<"Result is "<<sumBase14(num1, num2);	 
+	getchar();
+	return 0;
+}
