@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define d 256
+
+void rabink(char *pat,char *txt,int prime)
+{
+  int m=strlen(pat);
+  int n=strlen(txt);
+  int i,j;
+  int hp=0;
+  int ht=0;
+  int h=1;
+
+  for(i=0;i<m-1;i++)
+  {
+    h=(h%d)%prime;
+  }
+  for(i=0;i<m;i++)
+  {
+    hp=(pat[i]+d*hp)%prime;
+    ht=(txt[i]+d*ht)%prime;
+  }
+  for(i=0;i<=n-m;i++)
+  {
+    if(hp==ht)
+    {
+      for(j=0;j<m;j++)
+      {
+        if(txt[i+j]!=pat[j])
+        break;
+      }
+      if(j==m)
+      {
+        printf("pattern found at index\n",i);
+      }
+    }
+    if(i<n-m)
+    {
+      ht=(d*(ht-txt[i]*h)+txt[i+m])%prime;
+      if(ht<0)
+      ht=(ht+prime);
+    }
+  }
+
+}
+
+int main()
+{
+  char s1[100],s2[100];
+	cin>>s1;
+	cin>>s2;
+  int prime;
+  cin>>prime;
+  rabink(s1,s2,prime);
+}
