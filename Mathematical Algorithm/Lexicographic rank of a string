@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+#include<string.h>
+using namespace std;
+
+int fact(int n)
+{
+  return (n<=1)?1:n*fact(n-1);
+}
+
+int find(car *s,int l,int h)
+{
+  int c=0,i;
+  for(int i=l+1;i<=h;i++)
+  {
+    ++c;
+  }
+  return c;
+}
+
+int rank(char *s)
+{
+  int l=strlen(s);
+  int m=fact(l);
+  int c;
+  int r=1;
+  int i;
+  for(i=0;i<l;i++)
+  {
+    m/=l-i;
+    c=find(s,i,l-1);
+    r+=c*m;
+}
+return r;
+}
+int main()
+{
+  char *s[100];
+  cin>>s;
+  cout<<rank(s);
+  return 0;
+}
+
+
